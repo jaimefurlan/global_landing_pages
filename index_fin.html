@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Soph-IA - Recuperação de crédito com inteligênc-IA" />
+  <meta name="keywords" content="inteligência artificial, cobrança, crédito, IA, negociação" />
+  <meta name="author" content="Global Financeira" />
+  <title>Soph-IA</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+    html, body {
+      height: 100%;
+      font-family: 'Arial', sans-serif;
+      background-color: #000;
+      color: #fff;
+      overflow-x: hidden;
+    }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+    body > *:not(canvas) {
+      position: relative;
+      z-index: 1;
+    }
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      background: rgba(0, 0, 0, 0.85);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 2;
+      border-bottom: 1px solid #333;
+    }
+    .logo img {
+      height: 40px;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 1rem;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #00cc99;
+    }
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 5rem 2rem 2rem;
+    }
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      animation: fadeInDown 1s ease-out forwards;
+      opacity: 0;
+    }
+    .hero h2 {
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: #ccc;
+      animation: fadeIn 2s ease-out forwards;
+      opacity: 0;
+    }
+    section {
+      padding: 5rem 2rem;
+      max-width: 900px;
+      margin: auto;
+      line-height: 1.6;
+      animation: fadeIn 2s ease-out forwards;
+      opacity: 0;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      background-color: #111;
+      font-size: 0.9rem;
+      color: #aaa;
+      margin-top: 2rem;
+    }
+    @keyframes fadeInDown {
+      from {
+        transform: translateY(-30px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+<canvas id="bgCanvas"></canvas>
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="Global Financeira Logo">
+  </div>
+  <nav>
+    <a href="#sobre">Sobre</a>
+    <a href="#servicos">Serviços</a>
+    <a href="#contato">Contato</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <h1>Soph-IA</h1>
+  <h2>Recuperação de crédito com inteligênc-IA</h2>
+</div>
+
+<section id="sobre">
+  <h2>Sobre a Global Financeira</h2>
+  <p>
+    A Global é pioneira na aplicação prática de inteligência artificial para a recuperação de crédito em larga escala. Desenvolvemos internamente a <strong>Soph-IA</strong>, nossa agente autônoma que conduz negociações com devedores de forma inteligente, empática e eficaz, 24 horas por dia.
+  </p>
+  <p>
+    Já realizamos milhares de cobranças todos os meses de forma 100% autônoma, e a Soph-IA representa a nova fronteira da cobrança: combinando dados, linguagem natural e aprendizado constante para maximizar resultados sem comprometer a experiência do usuário.
+  </p>
+</section>
+
+<section id="servicos">
+  <h2>Nossos Serviços</h2>
+  <p>
+    A Soph-IA atua em toda a jornada de cobrança: desde o primeiro contato via WhatsApp até propostas personalizadas com base no perfil do devedor, gatilhos de comportamento e inteligência preditiva.
+  </p>
+  <p>
+    Conectada ao nosso data lake e CRM inteligente, a IA realiza negociações em tempo real, aplica políticas de cobrança adaptativas, gera relatórios automatizados e escala casos para humanos apenas quando necessário. Tudo isso com total compliance à LGPD e rastreabilidade por auditoria digital.
+  </p>
+</section>
+
+<section id="contato">
+  <h2>Fale Conosco</h2>
+  <p>
+    Quer saber como podemos ajudar sua empresa a recuperar crédito com mais eficiência? Entre em contato com a equipe da Global Financeira e descubra nossas soluções personalizadas.
+  </p>
+</section>
+
+<footer>
+  <div>Global Estratégias Financeiras Ltda</div>
+  <div>CNPJ: 14.387.308/0005-70</div>
+  <div>Endereço: Rua Vergueiro, 2279, Conjunto 118, Vila Mariana, São Paulo - SP, 04101-100</div>
+</footer>
+
+<script>
+  const canvas = document.getElementById('bgCanvas');
+  const ctx = canvas.getContext('2d');
+  let width, height;
+  function resizeCanvas() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+  class Comet {
+    constructor() { this.reset(); }
+    reset() {
+      this.x = Math.random() * width;
+      this.y = Math.random() * height;
+      this.length = Math.random() * 80 + 40;
+      this.speed = Math.random() * 2 + 1;
+      this.angle = Math.random() * 2 * Math.PI;
+      this.opacity = Math.random() * 0.5 + 0.3;
+      this.color = this.randomColor();
+    }
+    randomColor() {
+      const colors = ['255,255,255', '0,255,255', '255,0,255', '0,200,255', '255,180,0', '0,255,150'];
+      return colors[Math.floor(Math.random() * colors.length)];
+    }
+    update() {
+      this.x += this.speed * Math.cos(this.angle);
+      this.y += this.speed * Math.sin(this.angle);
+      this.opacity -= 0.004;
+      if (this.opacity <= 0 || this.x < -200 || this.x > width + 200 || this.y < -200 || this.y > height + 200) {
+        this.reset();
+      }
+    }
+    draw(ctx) {
+      const endX = this.x - this.length * Math.cos(this.angle);
+      const endY = this.y - this.length * Math.sin(this.angle);
+      const gradient = ctx.createLinearGradient(this.x, this.y, endX, endY);
+      gradient.addColorStop(0, `rgba(${this.color}, ${this.opacity})`);
+      gradient.addColorStop(1, `rgba(${this.color}, 0)`);
+      ctx.strokeStyle = gradient;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(this.x, this.y);
+      ctx.lineTo(endX, endY);
+      ctx.stroke();
+    }
+  }
+  const comets = Array.from({ length: 20 }, () => new Comet());
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+    comets.forEach(comet => {
+      comet.update();
+      comet.draw(ctx);
+    });
+    requestAnimationFrame(animate);
+  }
+  animate();
+  const sections = document.querySelectorAll("section");
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = 1;
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  sections.forEach(section => observer.observe(section));
+</script>
+</body>
+</html>
